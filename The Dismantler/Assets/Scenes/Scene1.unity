@@ -489,12 +489,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 860630f77ea785f459901cd96c1cb95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementSpeed: 50
   rotationSpeed: 180
   raycastLookDistance_: 10
   raycastGroundCheckDistance_: 1.5
   isJumping: 0
-  jumpForce: 10
+  jumpForce: 100
+  gravityScale: 2
   DEBUG: 1
 --- !u!136 &976609571
 CapsuleCollider:

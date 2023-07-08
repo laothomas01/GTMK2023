@@ -14,6 +14,7 @@ public class PlayerController3D : MonoBehaviour
     public bool isJumping;
     public float jumpForce = 5f;
     private Rigidbody rb;
+    public int gravityScale;
 
 
     Ray lineOfSight_;
@@ -23,10 +24,12 @@ public class PlayerController3D : MonoBehaviour
     public bool DEBUG;
     Vector3 movement;
     Vector3 rotation;
+
+    float forwardInput,rotationInput;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Physics.gravity *= 2;
+        Physics.gravity *= gravityScale;
         lineOfSight_ = new Ray();
         groundCheck_ = new Ray();
         DEBUG = true;
@@ -37,11 +40,11 @@ public class PlayerController3D : MonoBehaviour
 
     void Update()
     {
-        // Movement controls
-        float forwardInput = Input.GetAxis("Vertical");
-        float rotationInput = Input.GetAxis("Horizontal");
-
-        movement.Set(0f,0f,forwardInput * movementSpeed);
+        // // Movement controls
+        forwardInput = Input.GetAxis("Vertical");
+        rotationInput = Input.GetAxis("Horizontal");
+        
+        movement.Set(0f,0f,forwardInput * movementSpeed * Time.smoothDeltaTime);
         movement = transform.TransformDirection(movement); // set current controller's direction
         movement.y = rb.velocity.y; // Preserve the current vertical velocity
         rb.velocity = movement; //preserving the vertical velocity, including gravity
@@ -50,6 +53,7 @@ public class PlayerController3D : MonoBehaviour
         lineOfSight_.direction = transform.forward;
         groundCheck_.origin = transform.position;
         groundCheck_.direction = Vector3.down;
+
         // Rotation controls
         float rotationAmount = rotationInput * rotationSpeed * Time.deltaTime;
         // Vector3 rotation = new Vector3(0f, rotationAmount, 0f);
@@ -63,6 +67,7 @@ public class PlayerController3D : MonoBehaviour
             Debug.Log("Raycast hit: " + lineOfSightHit_.collider.gameObject.name);
         }
         
+
 
         if(isGrounded() && !isJumping)
         {
@@ -87,9 +92,10 @@ public class PlayerController3D : MonoBehaviour
     }
     void FixedUpdate()
     {
+        
         if(isJumping)
         {
-             rb.AddForce(Vector3.up * jumpForce ,ForceMode.Impulse);
+             rb.AddForce(Vector3.up * jumpForce,ForceMode.Impulse);
             
              isJumping = false;
         }
