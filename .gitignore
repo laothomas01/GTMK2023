@@ -9,6 +9,12 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+# Unity3D project history
+/[Uu]nity[cC]ache/
+/[Bb]ackup[sS]cene[sS]/
+/[Uu]nityGenerated/
+/[Tt]emp/
+/[Oo]bj/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -25,7 +31,15 @@
 
 # Visual Studio cache directory
 .vs/
-
+/*.userprefs/
+/*.csproj
+/*.sln
+/*.suo
+/*.tmp
+/*.user
+/*.unityproj
+/*.booproj
+/*/BuildLog.*
 # Gradle cache directory
 .gradle/
 
@@ -46,7 +60,10 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
-
+# Ignore DLL, PDB, and DYLIB files
+*.dll
+*.pdb
+*.dylib
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta
